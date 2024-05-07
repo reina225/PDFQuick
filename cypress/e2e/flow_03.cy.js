@@ -1,4 +1,6 @@
-var website = "https://staging.pdfquick.com/?mode=CIX7RLLJ&flow=03&ppg=15&flow_popup=on"
+var website = "https://www.pdfquick.com/?mode=CIX7RLLJ&flow=01&ppg=23&flow_popup=on"
+var website_2 = "https://www.pdfquick.com/editor/form/420/?ppg=16"
+var website_3 = "https://www.pdfquick.com/editor/form/420/?ppg=01"
 var u_name = "Test Arjay"
 var emailuser = "testarjay"
 const d = new Date();
@@ -45,15 +47,17 @@ describe('PDFQuick', () => {
     cy.get('.resp-tabs-list > [aria-controls="hor_1_tab_item-2"] > :nth-child(2)').click()
     cy.get('#search_form').type(form)
     cy.get('[data-index="0"] > td > .btn').click()
+
+    
   })
 
   it('Form LP', () => {
-    cy.wait(2000)
+    cy.wait(1000)
     cy.get('.panel-1 > .btn').click()
   })
 
   it('Editor', () => {
-    cy.wait(2000)
+    cy.wait(5000)
     cy.get('#bt_get_started').click()
     /* For fields
     cy.get('#\31 -pdf').click()
@@ -65,17 +69,53 @@ describe('PDFQuick', () => {
   })
 
   it('Registration', () => {
-    // cy.wait(3000)
-    getIframeBody().find('#email_f3').type(email,{timeout:3000})
-    getIframeBody().find('#password_f3').type(password).wait(500)
-    getIframeBody().find('#password_con_f3').type(password)
-    getIframeBody().find('#btnsignup_f3').click()
+    cy.wait(2000)
+    getIframeBody().find('#fullname').type(u_name , {timeout:3000})
+    getIframeBody().find('#email').type(email , {timeout:3000})
+    getIframeBody().find('#password').type(password)
+    getIframeBody().find('#btnsignup').click()
   })
 
   it('Pricing', () => {
-    cy.wait(15000)
+    //For Pricing page responsiveness
+    cy.wait(5000)
     cy.get('#iframeContainer > div > button').click()
+    /*cy.wait(10000)
+    getIframeBody().contains('Choose Plan' , {timeout:10000}).click()*/
   })
+
+  it('Editor_2', () => {
+    cy.visit(website_2)
+    cy.wait(2000)
+    cy.get('#bt_get_started').click()
+    cy.get('#button_container > .text-center > .btn').click().wait(1000)
+  })
+
+  it('Pricing_2', () => {
+    //For Pricing page responsiveness
+    cy.wait(5000)
+    cy.get('#iframeContainer > div > button').click()
+    /*cy.wait(10000)
+    getIframeBody().contains('Choose Plan' , {timeout:10000}).click()*/
+  })
+
+  it('Editor_3', () => {
+    cy.visit(website_2)
+    cy.wait(2000)
+    cy.get('#bt_get_started').click()
+    cy.get('#button_container > .text-center > .btn').click().wait(1000)
+  })
+
+  it('Pricing_3', () => {  
+    cy.wait(5000)
+    cy.get('#iframeContainer > div > button').click()
+    cy.wait(10000)
+    getIframeBody().contains('Choose Plan' , {timeout:10000}).click()
+  })
+
+
+
+ 
 
 
 
